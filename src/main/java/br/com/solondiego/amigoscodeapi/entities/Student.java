@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Data
 public class Student {
     private long id;
-    private String nome;
+    private String name;
     private String email;
-    private LocalDate aniversario;
-    private int idade;
+    private LocalDate dob;
+    private int age;
 }

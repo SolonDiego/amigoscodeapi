@@ -1,6 +1,8 @@
 package br.com.solondiego.amigoscodeapi.service;
 
 import br.com.solondiego.amigoscodeapi.entities.Student;
+import br.com.solondiego.amigoscodeapi.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -9,8 +11,18 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    public List<Student> getStudents(){
-        return List.of(new Student(1,"SolonDiego", "solondiego@gmail.com", LocalDate.of(1985, Month.MARCH,1),37));
+    public final StudentRepository studentRepository;
 
+    @Autowired
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    public List<Student> getStudents(){
+        return studentRepository.findAll();
+    }
+
+    public Student saveStudent(Student student){
+        return studentRepository.save(student);
     }
 }

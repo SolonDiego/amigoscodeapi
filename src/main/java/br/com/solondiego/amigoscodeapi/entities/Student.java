@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,5 +31,16 @@ public class Student {
     private String name;
     private String email;
     private LocalDate dob;
+
+    @Transient
     private int age;
+
+    public void setDob(String dob) {
+        LocalDate localDate = LocalDate.parse(dob);
+        this.dob = localDate;
+    }
+
+    public Integer getAge(){
+        return Period.between(this.dob, LocalDate.now()).getYears();
+    }
 }

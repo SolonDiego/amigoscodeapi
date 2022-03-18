@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/student")
+@RequestMapping("/api/student")
 public class StudentController {
 
     private final StudentService studentService;
@@ -23,13 +23,21 @@ public class StudentController {
 
     @GetMapping("/get")
     public List<Student> getStudents(){
-
         return studentService.getStudents();
     }
 
-    @PostMapping("/save")
-    public @ResponseBody Student savedStudent(Student student){
-        studentService.saveStudent(student);
-        return student;
+    @PostMapping("/add")
+    public @ResponseBody void  registerNewStudent(Student student){
+        studentService.addNewStudent(student);
+    }
+
+    @DeleteMapping("remove/{id}")
+    public void deleteStudent(@PathVariable("id") Long id){
+        studentService.removeStudent(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public void updateStudent(@PathVariable("id") Long id, @RequestParam(required = false) String name, @RequestParam(required = false) String email){
+        studentService.updateStudent(id, name, email);
     }
 }

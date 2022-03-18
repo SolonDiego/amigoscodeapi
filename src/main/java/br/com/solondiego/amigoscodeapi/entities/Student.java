@@ -31,8 +31,6 @@ public class Student {
     private String name;
     private String email;
     private LocalDate dob;
-
-    @Transient
     private int age;
 
     public void setDob(String dob) {
@@ -40,7 +38,7 @@ public class Student {
         this.dob = localDate;
     }
 
-    public Integer getAge(){
-        return Period.between(this.dob, LocalDate.now()).getYears();
-    }
+//    public Integer getAge(){
+//        return Period.between(this.dob, LocalDate.now()).getYears();
+//    }
 }
